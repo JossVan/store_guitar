@@ -3,9 +3,16 @@ import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 import { db } from "./database/db";
 function App() {
+  const initialCart = () => {
+    const localStorageCart = localStorage.getItem("cart");
+    return localStorageCart ? JSON.parse(localStorageCart) : [];
+  };
   const [data, setData] = useState(db);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(initialCart);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const MAX_QUANTITY = 5;
   const MIN_QUANTITY = 1;
   function addToCart(item) {
