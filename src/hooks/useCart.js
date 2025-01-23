@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { db } from "../database/db";
 const useCart = () => {
   const initialCart = () => {
@@ -55,6 +55,14 @@ const useCart = () => {
     setCart([]);
   }
 
+    const isEmpty = useMemo(() => cart.length === 0, [cart]);
+  
+    const cartTotal = useMemo(
+      () =>
+        cart.reduce((total, guitar) => total + guitar.price * guitar.quantity, 0),
+      [cart]
+    );
+
   return {
     data,
     cart,
@@ -63,6 +71,8 @@ const useCart = () => {
     decreaseQuantity,
     increaseQuantity,
     clearCart,
+    isEmpty,
+    cartTotal
   };
 };
 

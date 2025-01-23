@@ -1,20 +1,13 @@
-import { useMemo } from "react";
-
+import useCart from "../hooks/useCart";
 export default function Header({
   cart,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  isEmpty,
+  cartTotal,
 }) {
-  const isEmpty = useMemo(() => cart.length === 0, [cart]);
-
-  const cardTotal = useMemo(
-    () =>
-      cart.reduce((total, guitar) => total + guitar.price * guitar.quantity, 0),
-    [cart]
-  );
-
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -95,7 +88,7 @@ export default function Header({
                     </table>
 
                     <p className="text-end">
-                      Total pagar: <span className="fw-bold">${cardTotal}</span>
+                      Total pagar: <span className="fw-bold">${cartTotal}</span>
                     </p>
                     <button
                       className="btn btn-dark w-100 mt-3 p-2"
