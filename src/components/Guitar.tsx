@@ -1,5 +1,12 @@
-export default function Guitar({ guitar, addToCard }) {
-  const { id, name, image, description, price } = guitar;
+import type { Guitar } from "../types/types";
+
+type GuitarProps = {
+  guitar: Guitar;
+  addToCard: (guitar: Guitar) => void;
+};
+
+export default function Guitar({ guitar, addToCard }: GuitarProps) {
+  const { name, image, description, price } = guitar;
   return (
     <div className="col-md-6 col-lg-4 my-4 row align-items-center">
       <div className="col-4">
